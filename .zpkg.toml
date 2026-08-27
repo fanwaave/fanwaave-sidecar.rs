@@ -1,4 +1,28 @@
-name = "fanwaave-sidecar.rs"
-kind = "sidecar"
+[package]
+org = "fanwaave"
+name = "fanwaave-sidecar"
 version = "0.1.0"
+description = "Sidecar for Fanwaave."
+license = "MIT"
+keywords = ["sidecar", "observability", "k8s"]
+language = "rust"
 
+[package.repository]
+vcs = "git"
+url = "https://github.com/fanwaave/fanwaave-sidecar.rs"
+
+[dependencies]
+"ores-otel/ores-otel-sidecar" = "^0.1.0"
+
+[build]
+command = "cargo build --release --locked --bin fanwaave-sidecar"
+outputs = ["target/release/fanwaave-sidecar"]
+
+[bin]
+fanwaave-sidecar = "target/release/fanwaave-sidecar"
+
+[install]
+adapter = "none"
+
+[scripts]
+test = "cargo test --all-targets --locked"
