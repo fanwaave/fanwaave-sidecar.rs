@@ -16,6 +16,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
-      - run: cargo fmt --all -- --check
+      - name: Format hand-authored entrypoint (generated flags-2-env code is immutable)
+        run: rustfmt --check --config skip_children=true src/main.rs
       - run: cargo clippy --all-targets -- -D warnings
       - run: cargo test --all-targets
